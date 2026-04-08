@@ -1,0 +1,34 @@
+benchmark:
+  name: openenv_content_moderation
+  display_name: OpenEnv Content Moderation Benchmark
+  version: "1.0.0"
+  description: >
+    A deterministic moderation benchmark where an agent reviews reported content,
+    requests context when appropriate, maps content to policy, selects enforcement,
+    and decides when escalation is required.
+  tags:
+    - openenv
+    - moderation
+    - safety
+    - reinforcement-learning
+    - fastapi
+    - deterministic
+
+environment:
+  entrypoint: server.app:app
+
+tasks:
+  - name: task_easy
+    difficulty: easy
+    description: Obvious violations or clearly safe content with minimal ambiguity.
+  - name: task_medium
+    difficulty: medium
+    description: Context-aware moderation involving quote speech, figurative language, and targeted harassment.
+  - name: task_hard
+    difficulty: hard
+    description: Multi-factor moderation requiring escalation judgment and resistance to shortcut strategies.
+
+validation:
+  deterministic_grading: true
+  score_range: [0.0, 1.0]
+  requires_inference_file: true
